@@ -170,44 +170,44 @@ class GuiMain(form.Frame):
             jobList = prepareJobs()
             self.calculationProgressBar["value"] = 0
             self.calculationProgressBar.update()
-            startTime = time.clock()
+            startTime = time.perf_counter()
             self.randomResult = randomSolution(copy.deepcopy(jobList))
-            strTime = strTime+"RANDM: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in self.randomResult]))+"\n"
+            strTime = strTime+"RANDM: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in self.randomResult]))+"\n"
             createGanttChart(self.frTabRandomSol, self.randomResult)
 
             self.calculationProgressBar["value"] = 100* 1/6
             self.calculationProgressBar.update()
-            startTime = time.clock()
+            startTime = time.perf_counter()
             fifoResult = algorithmFIFO(copy.deepcopy(jobList))
-            strTime = strTime+"FIFO: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in fifoResult]))+"\n"
+            strTime = strTime+"FIFO: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in fifoResult]))+"\n"
             createGanttChart(self.frTabFifo, fifoResult)
             
             self.calculationProgressBar["value"] = 100* 2/6
             self.calculationProgressBar.update()  
-            startTime = time.clock()
+            startTime = time.perf_counter()
             lifoResult = algorithmLIFO(copy.deepcopy(jobList))
-            strTime = strTime+"LIFO: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in lifoResult]))+"\n"
+            strTime = strTime+"LIFO: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in lifoResult]))+"\n"
             createGanttChart(self.frTabLifo, lifoResult)
 
             self.calculationProgressBar["value"] = 100* 3/6
             self.calculationProgressBar.update()  
-            startTime = time.clock()
+            startTime = time.perf_counter()
             resultLPT = algorithmLPT(copy.deepcopy(jobList))
-            strTime = strTime+"LPT: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in resultLPT]))+"\n"
+            strTime = strTime+"LPT: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in resultLPT]))+"\n"
             createGanttChart(self.frTabLPT, resultLPT)
             
             self.calculationProgressBar["value"] = 100* 4/6
             self.calculationProgressBar.update()
-            startTime = time.clock()
+            startTime = time.perf_counter()
             self.resultSPT = algorithmSPT(copy.deepcopy(jobList))
-            strTime = strTime+"SPT: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in self.resultSPT]))+"\n"
+            strTime = strTime+"SPT: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in self.resultSPT]))+"\n"
             createGanttChart(self.frTabSPT, self.resultSPT)
 
             self.calculationProgressBar["value"] = 100* 5/6
             self.calculationProgressBar.update() 
-            startTime = time.clock()
+            startTime = time.perf_counter()
             optResult = optimalSolution(copy.deepcopy(jobList))
-            strTime = strTime+"OPTIM: "+ str(round(time.clock() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in optResult]))+"\n"
+            strTime = strTime+"OPTIM: "+ str(round(time.perf_counter() - startTime, 4))+" sec.\nCmax="+ str(max([j.endTime for j in optResult]))+"\n"
             createGanttChart(self.frTabOptSol, optResult)
             
             self.lblCalculationsTime.configure(text=strTime)
